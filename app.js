@@ -368,6 +368,13 @@ app.post('/admintouser', function(req, res) {
   res.send('Ok'); 
 });
 
+app.post('/setpriority', function(req, res) {
+  var no = Number(req.body.no);
+  var timestamp = req.body.timestamp;
+   db.property.update({timestamp:timestamp},{$set : {"priority": no}},{upsert:true,multi:true});
+  res.send('Ok'); 
+});
+   // db.property.update({},{$set : {"priority": 1}},{upsert:true,multi:true});
 
 // ************************************* CONTACT *************************************************
 
@@ -592,7 +599,8 @@ app.post('/postproperty/', function(req, res){
           flagno: 0,
           flagcomment: "",
           image1: 'http://shubhamyeole.byethost8.com/public_html/property/'+filename[0],
-          allphoto: allphoto
+          allphoto: allphoto,
+          priority: 1
        }
        var newNotification = {
           user: req.session.users._id,
@@ -706,7 +714,9 @@ function setNotification(newNotification){
 app.post('/search', function(req, res) {
   var loc = req.body.location;
   // console.log(loc);
-   db.property.find({ addToSearch: {'$regex': loc} }, function (err, property) {
+        // db.property.find({}).skip(0).sort({timestamp: -1}).limit(5).toArray(function (err, latestproperty) {
+
+   db.property.find({ addToSearch: {'$regex': loc}}).sort({priority: -1}).toArray(function (err, property) {
     res.send(property);
   });
 });

@@ -30,3 +30,18 @@ $(document).on("click",".usertype",function() {
                                 '</tr>');
 	  });
 });
+
+$(document).on("click",".priority",function() { 
+	var timestamp = $(this).data("id");
+	if ($(this).prop('checked')==true){
+        $.post( "/setpriority/", { no: 0, timestamp: timestamp}).done(function( data ) {
+        	$("#status_"+timestamp).html('<img class="primg" src="/images/premium.jpg">');
+        	$("#tr_"+timestamp).addClass("up");
+	  	});
+    }else{
+    	 $.post( "/setpriority/", { no: 1, timestamp:timestamp}).done(function( data ) {
+        	$("#status_"+timestamp).html("Degraded");
+        	$("#tr_"+timestamp).removeClass("up");
+	  	});
+    }
+});

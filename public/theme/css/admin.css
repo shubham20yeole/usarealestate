@@ -13,3 +13,10 @@
     background: #84b3c7
 
 }
+.wraptext{white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100px;
+  min-width: 100px;}
+.up{color: #0f71b4; background-color: #e9eff3 !important}
+.primg{width: 20px; height: 20px; border-radius: 50%}

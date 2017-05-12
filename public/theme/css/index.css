@@ -82,3 +82,6 @@
 #searchloccation:focus {
     width: 900px;
 }
+.primg{width: 20px; height: 20px; border-radius: 50%}
+.up{color: #0f71b4; background-color: #e9eff3 !important}
+.pr_fr_hi{display: none;}
